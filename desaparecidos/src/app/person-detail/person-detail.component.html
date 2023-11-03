@@ -1,0 +1,51 @@
+<div class="container-main">
+    <div class="container-header">
+        <h2>Consulta detalhada</h2>
+        <div class="social">
+            <img class="social-img" src="../../assets/img/facebook.png" alt="facebook" (click)="closeDialog()">
+            <img class="social-img" src="../../assets/img/instagram.png" alt="instagram" (click)="closeDialog()">
+            <img class="social-img" src="../../assets/img/whatsapp.png" alt="whatsapp" (click)="closeDialog()">
+        </div>
+    </div>
+
+    <div class="container-body">
+        <div class="profile-picture">
+            <img class="profile-img" *ngIf="dataSource.urlFoto != null" src={{dataSource.urlFoto}}>
+            <img class="profile-img" *ngIf="dataSource.urlFoto == null"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6qRkUoertC_uVfpbOmyF3fkoJieb0dzN_hg&usqp=CAU">
+
+            <img class="profile-img"
+                *ngIf="dataSource.ultimaOcorrencia.listaCartaz && dataSource.ultimaOcorrencia.listaCartaz.length > 0 && dataSource.ultimaOcorrencia.listaCartaz[0]?.urlCartaz != null"
+                src="{{dataSource.ultimaOcorrencia.listaCartaz[0]?.urlCartaz}}">
+        </div>
+        <div class="container-details">
+            <div class="profile-details">
+                <h4>Perfil</h4>
+                <ul>
+                    <li>Nome: <strong>{{dataSource.nome}}</strong></li>
+                    <li>Idade: {{dataSource.idade}}</li>
+                    <li>Sexo: {{dataSource.sexo}}</li>
+                    <li>Vivo: {{dataSource.vivo == true ? "Sim" : "Não"}}</li>
+                </ul>
+            </div>
+            <div class="profile-events">
+                <h4>Última Ocorrência</h4>
+                <ul>
+                    <li *ngIf="dataSource.ultimaOcorrencia?.dtDesaparecimento != null">Data Desaparecimento:
+                        {{dataSource.ultimaOcorrencia.dtDesaparecimento}}</li>
+                    <li *ngIf="dataSource.ultimaOcorrencia?.dataLocalizacao != null">Data Localização:
+                        {{dataSource.ultimaOcorrencia.dataLocalizacao}}</li>
+                    <li *ngIf="dataSource.ultimaOcorrencia?.encontradoVivo != null">Encontrado Vivo:
+                        {{dataSource.ultimaOcorrencia.encontradoVivo == true ? "Sim" : "Não"}}</li>
+                    <li *ngIf="dataSource.ultimaOcorrencia?.localDesaparecimentoConcat != null">Local do
+                        Desaparecimento: {{dataSource.ultimaOcorrencia.localDesaparecimentoConcat}}</li>
+                    <li *ngIf="dataSource.ultimaOcorrencia.ocorrenciaEntrevDesapDTO?.informacao != null">Informações
+                        Relevantes: {{dataSource.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO.informacao}}</li>
+                    <li *ngIf="dataSource.ultimaOcorrencia.ocorrenciaEntrevDesapDTO?.vestimentasDesaparecido != null">
+                        Vestimentas: {{dataSource.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

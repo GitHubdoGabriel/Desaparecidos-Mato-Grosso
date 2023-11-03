@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="background-missing">
+  <div class="mat-elevation-z8">
+    <div class="search">
+      <input class="search-input" type="text" placeholder="Localizar..."
+        (keyup)="updateFilter($event, tableFilter)" />
+      <mat-form-field class="form-filter">
+        <mat-label>Filtrar por:</mat-label>
+        <mat-select [(ngModel)]="tableFilter">
+          <mat-option value="nome">Nome</mat-option>
+          <mat-option value="idade">Idade</mat-option>
+          <mat-option value="sexo">Sexo</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <table class="tabelaColaboradores" mat-table [dataSource]="dataSource" matSort
+      (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by nome">Nome</th>
+        <td mat-cell *matCellDef="let row">{{row.nome}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="idade">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by idade">Idade</th>
+        <td mat-cell *matCellDef="let row">{{row.idade}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="sexo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by sexo">Sexo</th>
+        <td mat-cell *matCellDef="let row">{{row.sexo}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="urlFoto">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <img *ngIf="row.urlFoto != null" class="people-img" src={{row.urlFoto}}>
+          <img *ngIf="row.urlFoto == null" class="people-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6qRkUoertC_uVfpbOmyF3fkoJieb0dzN_hg&usqp=CAU">
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row (click)="openModal(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="[12, 24, 36]"></mat-paginator>
+</div>
